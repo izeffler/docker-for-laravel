@@ -1,0 +1,76 @@
+services:
+    mysql:
+        image: "mysql:8.0"
+        container_name: mysql
+        restart: always
+        volumes:
+            - "./docker/.mysql-data/db:/var/lib/mysql"
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+        ports:
+            - "3306:3306"
+        networks:
+            environment_network:
+                ipv4_address: 172.29.0.2
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin
+        restart: always
+        environment:
+            - PMA_HOST=mysql
+            - PMA_USER=root
+            - PMA_PASSWORD=password
+        ports:
+            - "8080:80"
+        networks:
+            environment_network:
+                ipv4_address: 172.29.0.3
+
+    php:
+        build:
+            context: ./docker/php
+        container_name: php
+        restart: always
+        volumes:
+            - ./:/var/www
+        working_dir: /var/www
+        networks:
+            environment_network:
+                ipv4_address: 172.29.0.4
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+        networks:
+            environment_network:
+                ipv4_address: 172.29.0.5
+
+    node:
+        image: node:20
+        container_name: node
+        working_dir: /var/www
+        restart: always
+        volumes:
+            - ./:/var/www
+        command: sh -c "npm install && npm run dev"
+        ports:
+            - "5173:5173"
+        networks:
+            environment_network:
+                ipv4_address: 172.29.0.6
+
+networks:
+    environment_network:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.29.0.0/16
