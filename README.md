@@ -1,6 +1,5 @@
 # 🚀 Docker for Laravel
 
-[![Laravel](https://img.shields.io/badge/Laravel-10.x-red?logo=laravel)](https://laravel.com)
 [![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker)](https://www.docker.com/)
 
 Credits: [@Pansiere](https://github.com/Pansiere)
@@ -100,3 +99,4 @@ docker exec -i mysql -uroot -ppassword
 ## 📜 License
 
 This project is open-sourced under the [MIT license](LICENSE).
+
