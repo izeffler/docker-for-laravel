@@ -1,45 +1,102 @@
-CRÉDITOS: https://github.com/Pansiere
+# 🚀 Docker for Laravel
 
-DOCKER-FOR-LARAVEL
+[![Laravel](https://img.shields.io/badge/Laravel-10.x-red?logo=laravel)](https://laravel.com)
+[![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker)](https://www.docker.com/)
 
-ESSE PROJETO DOCKER FACILITA O BUILD DA SUA APLICAÇÃO EM AMBIENTE LOCAL, COM ESSE DOCKER EM EXECUÇÃO O SEU VITE É EXECUTADO EM BACKGROUND, TIRANDO A NECESSIDADE DE EXECUTAR `npm run dev`
+Credits: [@Pansiere](https://github.com/Pansiere)
 
-PASSO A PASSO DE COMO USAR O DOCKER
+---
 
-- CLONE O REPOSITÓRIO E COPIE SEUS ARQUIVOS PARA A RAIZ DO SEU PROJETO LARAVEL
+## 📖 Overview
 
-```shell
+This project provides a **Docker environment for Laravel** that simplifies the setup of your local development environment.  
+
+✅ Runs **Laravel + PHP + MySQL + phpMyAdmin**  
+✅ **Vite** runs automatically in the background (no need to run `npm run dev`)  
+✅ Pre-configured containers for faster development  
+
+---
+
+## ⚡ Requirements
+
+- [Docker](https://docs.docker.com/get-docker/) installed  
+- [Docker Compose](https://docs.docker.com/compose/install/) installed  
+- Laravel project (existing or new)  
+
+---
+
+## 🛠️ Installation
+
+1. Clone this repository into your Laravel project root:
+
+```bash
 git clone git@github.com:izeffler/docker-for-laravel.git
 ```
 
-- NO .ENV DO SEU PROJETO LARAVEL, CONFIGURE O DATABASE DESSA FORMA
+2. Update your Laravel `.env` database configuration:
 
-```php
+```dotenv
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
-DB_DATABASE=SEU_DB_AQUI
+DB_DATABASE=your_database
 DB_USERNAME=root
 DB_PASSWORD=password
 ```
 
-- BUILDAR DOCKER
+3. Build and start Docker containers:
 
-```
+```bash
 docker compose up -d --build
 ```
 
-- URLS DE ACESSO
+---
 
+## 🌐 Services & Access
+
+* Laravel app: [http://localhost](http://localhost)
+* phpMyAdmin: [http://localhost:8080](http://localhost:8080) (auto login enabled)
+
+---
+
+## 🐳 Container Access
+
+Open a PHP container shell:
+
+```bash
+docker exec -it php bash
 ```
-localhost -> acessa sua aplicação na web
-localhost:8080 -> acessa seu phpMyAdmin (login automático e direto)
+
+Run MySQL commands inside the MySQL container:
+
+```bash
+docker exec -i mysql -uroot -ppassword
 ```
 
-- ACESSO DOS CONTAINERS
+---
 
-```shell
-docker exec -it php bash # comando para acessar o container do php
-docker exec -i mysql -uroot -ppassword # comando para executar comandos mysql dentro do container mysql
+## 💡 Tips
 
-```
+* To rebuild containers after changes:
+
+  ```bash
+  docker compose up -d --build
+  ```
+
+* To stop containers:
+
+  ```bash
+  docker compose down
+  ```
+
+* To reset everything (including database data):
+
+  ```bash
+  docker compose down -v
+  ```
+
+---
+
+## 📜 License
+
+This project is open-sourced under the [MIT license](LICENSE).
