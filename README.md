@@ -1,3 +1,5 @@
+CRÉDITOS: https://github.com/Pansiere
+
 DOCKER-FOR-LARAVEL
 
 ESSE PROJETO DOCKER FACILITA O BUILD DA SUA APLICAÇÃO EM AMBIENTE LOCAL, COM ESSE DOCKER EM EXECUÇÃO O SEU VITE É EXECUTADO EM BACKGROUND, TIRANDO A NECESSIDADE DE EXECUTAR `npm run dev`
@@ -39,4 +41,5 @@ localhost:8080 -> acessa seu phpMyAdmin (login automático e direto)
 ```shell
 docker exec -it php bash # comando para acessar o container do php
 docker exec -i mysql -uroot -ppassword # comando para executar comandos mysql dentro do container mysql
+
 ```
