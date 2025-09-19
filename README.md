@@ -43,7 +43,33 @@ DB_USERNAME=root
 DB_PASSWORD=password
 ```
 
-3. Build and start Docker containers:
+3. Prepare your vite.config.js file:
+
+```bash
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        tailwindcss(),
+    ],
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        hmr: {
+            host: 'localhost',
+            port: 5173,
+        }
+    }
+});
+```
+
+4. Build and start Docker containers:
 
 ```bash
 docker compose up -d --build
