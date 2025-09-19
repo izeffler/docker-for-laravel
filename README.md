@@ -43,7 +43,7 @@ DB_USERNAME=root
 DB_PASSWORD=password
 ```
 
-3. Prepare your vite.config.js file:
+3. Prepare your `vite.config.js` file and configure it with the following server options:
 
 ```bash
 import { defineConfig } from 'vite';
